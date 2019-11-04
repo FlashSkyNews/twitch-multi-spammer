@@ -11,30 +11,19 @@ export default class Spammer {
         this.username = username;
         this.oauthToken = oauthToken;
 
+        this.connectedChannels = [];
         this.twitchSocket = null;
         this.twitchSocketConnected = false;
-    }
 
-    /**
-     * @returns {object} OAuth response
-     */
-    static GetAccount() {
-        return axios({
-            method: "GET",
-            url: "https://id.twitch.tv/oauth2/validate",
-            headers: {
-                "Authorization": `OAuth ${this.oauth_token}`,
-            }
-        }).then(response => {
-            return response.data;
-        });
+        this._connectToTwitch();
     }
 
     _connectToTwitch() {
         this.twitchSocket = new WebSocket("wss://irc-ws.chat.twitch.tv/");
 
         this.twitchSocket.onopen = () => {
-            this.twitchSocket.send(`PASS oauth:${this.oauth}`);
+            this.twitchSocket.send("CAP REQ :twitch.tv/tags twitch.tv/commands");
+            this.twitchSocket.send(`PASS oauth:${this.oauthToken}`);
             this.twitchSocket.send(`NICK ${this.username.toLowerCase()}`);
             this.twitchSocketConnected = true;
         };
@@ -58,10 +47,12 @@ export default class Spammer {
         channel = channel.toLowerCase();
         if (this.twitchSocketConnected) {
             this.twitchSocket.send(`JOIN #${channel}`);
+            this.connectedChannels.push(channel);
         } else {
             let joinChannel = setInterval(() => {
                 if (this.twitchSocketConnected === true) {
                     this.twitchSocket.send(`JOIN #${channel}`);
+                    this.connectedChannels.push(channel);
                     clearInterval(joinChannel);
                 }
             }, 20);
@@ -76,6 +67,16 @@ export default class Spammer {
      */
     writeMessage(channel, message) {
         channel = channel.toLowerCase();
-        this.twitchSocket.send(`PRIVMSG #${channel} :${message}`);
+        if (this.twitchSocketConnected && this.connectedChannels.includes(channel)) {
+            this.twitchSocket.send(`PRIVMSG #${channel} :${message}`);
+        } else if (this.connectedChannels.includes(channel)) {
+            let writeMessage = setInterval(() => {
+                if (this.twitchSocketConnected === true) {
+                    this.twitchSocket.send(`PRIVMSG #${channel} :${message}`);
+                    clearInterval(writeMessage);
+                }
+            }, 20);
+            return;
+        }
     }
 }

@@ -5,7 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node --experimental-modules --es-module-specifier-resolution=node src/main.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/teyd/twitch-solo-spammer#readme",
   "dependencies": {
-    "axios": "^0.19.0",
     "ws": "^7.2.0"
   }
 }
