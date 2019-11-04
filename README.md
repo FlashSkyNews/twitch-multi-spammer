@@ -1,6 +1,9 @@
 # twitch-solo-spammer
 Spams in a single chat.
 
+## Requirements
+Node.JS version >= 8
+
 ## Installation
 
 ```sh
