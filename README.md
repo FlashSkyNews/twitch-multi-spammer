@@ -5,6 +5,7 @@ Spams in a single chat.
 
 ```sh
 git clone https://github.com/teyd/twitch-solo-spammer
+cd twitch-solo-spammer
 npm install
 ```
 
