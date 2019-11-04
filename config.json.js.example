@@ -1,0 +1,7 @@
+export default {
+    "username": "justinfan8766",
+    "oauth": "randomauth8766",
+    "message": "WH OMEGALUL",
+    "targetChannel": "justinfan8766",
+    "timeToSleep": 1000,
+};
