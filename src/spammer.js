@@ -1,4 +1,3 @@
-import axios from "axios";
 import WebSocket from "ws";
 
 export default class Spammer {
