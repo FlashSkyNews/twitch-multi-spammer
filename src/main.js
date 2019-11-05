@@ -3,12 +3,12 @@ import { sleep } from "./helper";
 import config from "../config.json";
 
 const spammer = new Spammer(config.username, config.oauth);
-spammer.joinChannel(config.username);
+spammer.joinChannel(config.targetChannel);
 
 (async() => {
     // eslint-disable-next-line no-constant-condition
     while (true) {
         spammer.writeMessage(config.targetChannel, config.message);
-        await sleep(1000);
+        await sleep(config.timeToSleep);
     }
 })();
