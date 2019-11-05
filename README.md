@@ -1,10 +1,15 @@
 # twitch-solo-spammer
 Spams in a single chat.
 
+## Requirements
+Node.JS version >= 8
+
 ## Installation
 
 ```sh
 git clone https://github.com/teyd/twitch-solo-spammer
+cd twitch-solo-spammer
+npm install
 ```
 
 ## Usage example
