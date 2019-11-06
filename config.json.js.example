@@ -1,7 +1,31 @@
 export default {
-    "username": "justinfan8766",
-    "oauth": "randomauth8766", // without `oauth:`
-    "message": "WH OMEGALUL",
-    "targetChannel": "justinfan8766",
-    "timeToSleep": 1000,
+    "accounts": [
+        {
+            "username": "forsen",
+            "oauth": "e2waa1ncj9kst3kav1ixef925mebev",
+        },
+        {
+            "username": "xqcow",
+            "oauth": "ecj9kst3kav1ixef2waa1n925mebev",
+        },
+        {
+            "username": "pewdiepie",
+            "oauth": "lihu4yo507bae2lygj20aam6gi96r9",
+        },
+        {
+            "username": "nymn",
+            "oauth": "qm6v17kn76x5s11zfvn9nc5n8hdc2n",
+        },
+        {
+            "username": "drdisrespect",
+            "oauth": "h4i49dcmz8yf4e81txa705fxmt4u0v",
+        },
+        {
+            "username": "teyyd",
+            "oauth": "y1s5gai43fuatopyzvbulryg425nb0",
+        },
+    ],
+    "message": "AlienPls",
+    "targetChannel": "forsen",
+    "timeToSleep": 2000,
 };
