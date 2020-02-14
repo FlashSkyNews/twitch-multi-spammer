@@ -1,5 +1,5 @@
-# twitch-solo-spammer
-Spams in a single chat.
+# twitch-multi-spammer
+Spam with multiple accounts
 
 ## Requirements
 Node.JS version >= 8
@@ -7,8 +7,8 @@ Node.JS version >= 8
 ## Installation
 
 ```sh
-git clone https://github.com/teyd/twitch-solo-spammer
-cd twitch-solo-spammer
+git clone https://github.com/teyd/twitch-multi-spammer
+cd twitch-multi-spammer
 npm install
 ```
 
