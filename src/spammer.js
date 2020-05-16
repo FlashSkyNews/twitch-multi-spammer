@@ -1,47 +1,39 @@
-import WebSocket from "ws";
-
-export default class Spammer {
-    /**
-     * 
-     * @param {object} oauthToken
-     * @param {number} sleepInterval
-     */
+let WebSocket = require("ws");
+ 
+class Spammer {
+ 
     constructor(username, oauthToken) {
         this.username = username;
         this.oauthToken = oauthToken;
-
+ 
         this.connectedChannels = [];
         this.twitchSocket = null;
         this.twitchSocketConnected = false;
-
+ 
         this._connectToTwitch();
     }
-
+   
     _connectToTwitch() {
         this.twitchSocket = new WebSocket("wss://irc-ws.chat.twitch.tv/");
-
+ 
         this.twitchSocket.onopen = () => {
             this.twitchSocket.send("CAP REQ :twitch.tv/tags twitch.tv/commands");
             this.twitchSocket.send(`PASS oauth:${this.oauthToken}`);
             this.twitchSocket.send(`NICK ${this.username.toLowerCase()}`);
             this.twitchSocketConnected = true;
         };
-
+ 
         this.twitchSocket.onmessage = (message) => {
             if (message.data === "PING :tmi.twitch.tv\r\n") {
                 this.twitchSocket.send("PONG :tmi.twitch.tv\r\n");
-            } 
+            }
         };
-
+ 
         this.twitchSocket.onerror = (err) => {
             console.log(err);
         };
     }
-
-    /**
-     * 
-     * @param {string} channel 
-     */
+ 
     joinChannel(channel) {
         channel = channel.toLowerCase();
         if (this.twitchSocketConnected) {
@@ -58,12 +50,7 @@ export default class Spammer {
             return;
         }
     }
-    
-    /**
-     * 
-     * @param {string} channel 
-     * @param {string} message 
-     */
+       
     writeMessage(channel, message) {
         channel = channel.toLowerCase();
         if (this.twitchSocketConnected && this.connectedChannels.includes(channel)) {
@@ -78,4 +65,7 @@ export default class Spammer {
             return;
         }
     }
+ 
 }
+
+module.exports = Spammer;

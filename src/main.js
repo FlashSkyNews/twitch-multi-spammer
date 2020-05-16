@@ -1,6 +1,6 @@
-import Spammer from "./spammer";
-import { sleep } from "./helper";
-import config from "../config.json";
+let Spammer = require("./spammer.js");
+let { sleep } = require("./helper.js");
+let config = require("../config.json.js");
 
 let spammers = [];
 for (const account of config.accounts) {
